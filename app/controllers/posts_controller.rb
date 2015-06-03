@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  require 'RMagick'
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -25,10 +26,10 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-		@post.pixel_matrices = pixelate(@post) 
 
     respond_to do |format|
       if @post.save
+				pixelate
         format.html { redirect_to root_path, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -72,9 +73,10 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :image)
     end
-		
-		# Pixelate the given image into matrices of pixel color, divided into layers
-		def pixelate(post)
-			[[1,2,3,4],[5,6,7,8]]	
-		end
+
+		# Todo
+    def pixelate
+			img = Magick::ImageList.new(@post.image.path(:medium))
+			img.display
+		end		
 end
