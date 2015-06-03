@@ -76,7 +76,31 @@ class PostsController < ApplicationController
 
 		# Todo
     def pixelate
+			max_resolution = 16
+			max_level = 4
+
 			img = Magick::ImageList.new(@post.image.path(:medium))
-			img.display
+			step = img.columns / max_resolution
+			template = Magick::Image.new(step, step)
+			pixel_matrices = []
+
+			for level in 0..max_level do
+				new_arr = Array.new(level**2) { Array.new(level**2) }
+				pixel_matrices << new_arr
+			end
+
+			for r in 0...max_resolution do
+				for c in 0...max_resolution do
+					block = img.export_pixels_to_str( c * step, 
+																					 r * step,
+																					 step,
+																					 step )
+					average_pixel = template.import_pixels(0,0,step, step, "RGB", block).scale(1,1).pixel_color(0,0)
+
+					pixel_matrices[max_level][r][c] = [average_pixel.red, average_pixel.green, average_pixel.blue]
+				end
+			end
+			@post.pixel_matrices = pixel_matrices
+			@post.save
 		end		
 end
