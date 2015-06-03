@@ -74,7 +74,7 @@ class PostsController < ApplicationController
       params.require(:post).permit(:title, :image)
     end
 
-		# Todo
+		# TODO: Refactor this shit. Using Ruby style!
     def pixelate
 			max_resolution = 16
 			max_level = 4
@@ -82,23 +82,38 @@ class PostsController < ApplicationController
 			img = Magick::ImageList.new(@post.image.path(:medium))
 			step = img.columns / max_resolution
 			template = Magick::Image.new(step, step)
-			pixel_matrices = []
+			pixel_matrices = Array.new(max_level + 1)
 
+			# Initialize 3D array: [level][row][col]
 			for level in 0..max_level do
-				new_arr = Array.new(level**2) { Array.new(level**2) }
-				pixel_matrices << new_arr
+				pixel_matrices[level] = level == max_level ? Array.new(2**level) { Array.new(2**level) } : nil
 			end
 
 			for r in 0...max_resolution do
 				for c in 0...max_resolution do
+					# Cut image into blocks
 					block = img.export_pixels_to_str( c * step, 
 																					 r * step,
 																					 step,
 																					 step )
 					average_pixel = template.import_pixels(0,0,step, step, "RGB", block).scale(1,1).pixel_color(0,0)
 
-					pixel_matrices[max_level][r][c] = [average_pixel.red, average_pixel.green, average_pixel.blue]
+					# Translate red,green,blue value into 8-bit depth from 16-bit depth (default RMagick)
+					pixel_matrices[max_level][r][c] = [average_pixel.red, average_pixel.green, average_pixel.blue].map! { |x| (x * 255.0 / Magick::QuantumRange).to_i }
 				end
+			end
+
+			# Compute the remaining levels
+			for level in max_level.downto(1) do
+				average = Array.new(2**(level-1)) { Array.new(2**(level-1)) { Array.new(3, 0.0) } }
+				for r in 0...2**level do
+					for c in 0...2**level do
+						average[r / 2][c / 2][0] += pixel_matrices[level][r][c][0] / 4
+						average[r / 2][c / 2][1] += pixel_matrices[level][r][c][1] / 4
+						average[r / 2][c / 2][2] += pixel_matrices[level][r][c][2] / 4
+					end
+				end
+				pixel_matrices[level-1] = Array.new(average)
 			end
 			@post.pixel_matrices = pixel_matrices
 			@post.save
