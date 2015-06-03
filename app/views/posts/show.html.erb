@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+<div class="title">
+	<strong>Title:</strong>
+	<%= @post.title %>
+</div>
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<div class="image-container">
+	<%= image_tag @post.image.url(:medium) %>
+	<% for level in 0..4 do %>
+		<%= content_tag :canvas, " ", id: "level#{level}", width: 512, height: 512, data: { pixel_matrix: @post.pixel_matrices[level] } %>
+	<% end %>
+</div>
 <%= link_to 'Back', posts_path %>
