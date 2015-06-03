@@ -1,4 +1,4 @@
-$('document').ready(function() {
+$(document).on("ready, page:change", function() {
 	var TWO_PI = 2 * Math.PI;
 	function draw(level) {
 		var canvas = $("#level" + level);
@@ -22,7 +22,8 @@ $('document').ready(function() {
 		}
 	}
 
-	for (var level = 0; level <= 4; level++) {
+	var MAX_LEVEL = $("#resolution_level").data("resolution-level");
+	for (var level = 0; level <= MAX_LEVEL; level++) {
 		draw(level);
 	}
 });

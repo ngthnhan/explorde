@@ -16,6 +16,10 @@
     <%= f.text_field :title %>
   </div>
   <div class="field">
+    <%= f.label :resolution_level, "Level of Details" %><br>
+    <%= f.number_field :resolution_level, in: 4..7 %>
+  </div>
+	<div class="field">
     <%= f.label :image %><br>
     <%= f.file_field :image %>
   </div>

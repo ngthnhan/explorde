@@ -71,13 +71,13 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :image)
+      params.require(:post).permit(:title, :image, :resolution_level)
     end
 
 		# TODO: Refactor this shit. Using Ruby style!
     def pixelate
-			max_resolution = 16
-			max_level = 4
+			max_level = 5
+			max_resolution = 2**max_level;
 
 			img = Magick::ImageList.new(@post.image.path(:medium))
 			step = img.columns / max_resolution
