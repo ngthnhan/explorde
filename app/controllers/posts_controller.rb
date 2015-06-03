@@ -76,7 +76,7 @@ class PostsController < ApplicationController
 
 		# TODO: Refactor this shit. Using Ruby style!
     def pixelate
-			max_level = 5
+			max_level = @post.resolution_level
 			max_resolution = 2**max_level;
 
 			img = Magick::ImageList.new(@post.image.path(:medium))
