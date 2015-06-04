@@ -61,7 +61,7 @@ $(document).on("ready, page:change", function() {
 		}
 		//do nothing if the side of the square is already at minimum(depend on max_level)
 		if (matched_corner[2] == minimum){
-
+			return
 		}	
 
 		//insert three new corner and modify the original one with diameter = 1/2 original
