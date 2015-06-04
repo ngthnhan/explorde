@@ -70,8 +70,8 @@ $(document).on("ready, page:change", function() {
 
 		//level row col of the clicked one
 		var level = Math.log2(512/matched_corner[2]);
-		var row = matched_corner[0]/matched_corner[2];
-		var col = matched_corner[1]/matched_corner[2];
+		var row = matched_corner[1]/matched_corner[2];
+		var col = matched_corner[0]/matched_corner[2];
 
 		//level row col of the new ones
 		var lrc = [[level+1,row*2+0,col*2+0],
@@ -95,7 +95,7 @@ $(document).on("ready, page:change", function() {
 			var level = lrc[i][0];
 			var row = lrc[i][1];
 			var col = lrc[i][2];
-			var color = pixel_matrices[level][col][row];
+			var color = pixel_matrices[level][row][col];
 			console.log(color[0] + " " + color[1] + " " + color[2]);
 			var radius = diameter/2;
 			var centerX = corner_list[index+i][0] + radius;
