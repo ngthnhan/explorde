@@ -1,11 +1,13 @@
 $(document).on("ready, page:change", function() {
 	var TWO_PI = 2 * Math.PI;
+	var dataCanvas = $("#data");
+	var pixel_matrices = dataCanvas.data('pixel-matrix');
 
 	var mainCanvas = $("#mainCanvas");
 	var pixel_matrix = mainCanvas.data("pixel-matrix");
 	var canvas = document.getElementById("mainCanvas");
 	var ctx = canvas.getContext("2d");
-
+	var red = 0, green = 1, blue = 2;
 	canvas.addEventListener("click", function(e){
 
 	    var x;
@@ -32,21 +34,18 @@ $(document).on("ready, page:change", function() {
 	function draw() {	
 		//var ctx = mainCanvas[0].getContext("2d");
 		var size = 512;
-		var radius = size / (Math.pow(2, 1));
-		var red = 0, green = 1, blue = 2;
+		var radius = size / (Math.pow(2, 1));	
 		var pixel = pixel_matrix[0][0];
 		ctx.beginPath();
 		ctx.moveTo((1) * radius, 0 * radius);
 		ctx.arc((1) * radius, (1) * radius, radius, 0, TWO_PI);
 		var rgb = "rgb(" + Math.floor(pixel[red]) + "," + Math.floor(pixel[green]) + "," + Math.floor(pixel[blue]) + ")";
-		console.log(rgb);
 		ctx.fillStyle = rgb;
 		ctx.fill();	
 
 	}
 
 	function animate(x,y){
-		console.log(x +","+y);
 		var matched_corner = [];
 		//find a matching corner
 		var index = -1;
@@ -67,7 +66,20 @@ $(document).on("ready, page:change", function() {
 		//insert three new corner and modify the original one with diameter = 1/2 original
 		//this is new diameter
 
-		diameter = matched_corner[2]/2;
+		var diameter = matched_corner[2]/2;
+
+		//level row col of the clicked one
+		var level = Math.log2(512/matched_corner[2]);
+		var row = matched_corner[0]/matched_corner[2];
+		var col = matched_corner[1]/matched_corner[2];
+
+		//level row col of the new ones
+		var lrc = [[level+1,row*2+0,col*2+0],
+				[level+1,row*2+0,col*2+1],
+				[level+1,row*2+1,col*2+0],
+				[level+1,row*2+1,col*2+1]];
+		
+
 		//modify the original 
 		corner_list[i][2] = diameter;
 		corner_list.splice(index+1, 0,
@@ -75,31 +87,32 @@ $(document).on("ready, page:change", function() {
 			[matched_corner[0], matched_corner[1]+diameter, diameter],
 			[matched_corner[0]+diameter, matched_corner[1]+diameter, diameter]);
 
-		console.log(corner_list);
 		//erase the original circle
 		//old diameter: diameter*2 is used to clear rectangle on canvas
 		ctx.clearRect(matched_corner[0], matched_corner[1], diameter*2, diameter*2);
 		//draw new items
-		for (var i = index; i < index+4; i++){
+		for (var i = 0; i < 4; i++){
+			var level = lrc[i][0];
+			var row = lrc[i][1];
+			var col = lrc[i][2];
+			var color = pixel_matrices[level][col][row];
+			console.log(color[0] + " " + color[1] + " " + color[2]);
 			var radius = diameter/2;
-			var centerX = corner_list[i][0] + radius;
-			var centerY = corner_list[i][1] + radius;
+			var centerX = corner_list[index+i][0] + radius;
+			var centerY = corner_list[index+i][1] + radius;
 			ctx.beginPath();
       		ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-      		ctx.fillStyle = 'green';
-      		ctx.fill();
-
-			console.log(centerX+" "+centerY);
+      		var rgb = "rgb(" + Math.floor(color[red]) + "," + Math.floor(color[green]) + "," + Math.floor(color[blue]) + ")";
+			ctx.fillStyle = rgb;
+			ctx.fill();	
+      		
 		}
 	}
 
 	//corner_list structure:
 	//[[corner1_x,corner1_y,diameter1],[corner2_x,corner2_x,diameter2],etc]
 	var corner_list = [[0,0,512]];
-	console.log(corner_list)
-	// hash with center and color pair to access appropriate color 
 	
-
 	var MAX_LEVEL = $("#resolution_level").data("resolution-level");
 	for (var level = 0; level <= MAX_LEVEL; level++) {
 		draw(level);
