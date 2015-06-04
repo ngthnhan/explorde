@@ -10,6 +10,7 @@ $(document).on("ready, page:change", function() {
 	var maskArray = [];
 	var backgroundOpacity = 0;
 	var backgroundRGB;
+	var backgroundScaleFactor = 0.2 / MAX_RESOLUTION;
 	initializeMaskArray();
 
 	function initializeMaskArray() {
@@ -93,7 +94,7 @@ $(document).on("ready, page:change", function() {
 			var pos = new mousePos(x, y);
 			if (canExplode(pos)) {
 				explode(pos.getCell());
-				backgroundOpacity += 0.0015;
+				backgroundOpacity += backgroundScaleFactor;
 				$("#main-canvas").css("background-color", "rgba(" + backgroundRGB + "," + backgroundOpacity + ")");
 			}
 		});
