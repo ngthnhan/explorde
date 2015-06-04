@@ -99,7 +99,7 @@ class PostsController < ApplicationController
 					average_pixel = template.import_pixels(0,0,step, step, "RGB", block).scale(1,1).pixel_color(0,0)
 
 					# Translate red,green,blue value into 8-bit depth from 16-bit depth (default RMagick)
-					pixel_matrices[max_level][r][c] = [average_pixel.red, average_pixel.green, average_pixel.blue].map! { |x| (x * 255.0 / Magick::QuantumRange).to_i }
+					pixel_matrices[max_level][r][c] = [average_pixel.red, average_pixel.green, average_pixel.blue].map! { |x| (x * 255.0 / Magick::QuantumRange - 15).to_i }
 				end
 			end
 
