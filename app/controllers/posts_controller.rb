@@ -76,7 +76,7 @@ class PostsController < ApplicationController
 
 		# TODO: Refactor this shit. Using Ruby style!
     def pixelate
-			max_level = @post.resolution_level
+			max_level = @post.resolution_level - 1
 			max_resolution = 2**max_level;
 
 			img = Magick::ImageList.new(@post.image.path(:medium))
@@ -99,7 +99,7 @@ class PostsController < ApplicationController
 					average_pixel = template.import_pixels(0,0,step, step, "RGB", block).scale(1,1).pixel_color(0,0)
 
 					# Translate red,green,blue value into 8-bit depth from 16-bit depth (default RMagick)
-					pixel_matrices[max_level][r][c] = [average_pixel.red, average_pixel.green, average_pixel.blue].map! { |x| (x * 255.0 / Magick::QuantumRange).to_i }
+					pixel_matrices[max_level][r][c] = [average_pixel.red, average_pixel.green, average_pixel.blue].map! { |x| convert_16bit_to_8bit_with_damping(x) }
 				end
 			end
 
@@ -118,4 +118,11 @@ class PostsController < ApplicationController
 			@post.pixel_matrices = pixel_matrices
 			@post.save
 		end		
+
+		def convert_16bit_to_8bit_with_damping(x, damping = 0)
+			eight_range = 255.0
+			sixteen_range = Magick::QuantumRange
+
+			return x * eight_range / sixteen_range - damping
+		end	
 end
