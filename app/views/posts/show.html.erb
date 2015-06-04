@@ -6,10 +6,10 @@
 </div>
 
 <div class="image-container">
-	<%= image_tag @post.image.url(:medium) %>
 	<%= tag :img, id: "resolution_level", style: "display: none", data: { resolution_level: @post.resolution_level } %>
 	<% for level in 0..@post.resolution_level do %>
 		<%= content_tag :canvas, " ", id: "level#{level}", width: 512, height: 512, data: { pixel_matrix: @post.pixel_matrices[level] } %>
 	<% end %>
+	<%= image_tag @post.image.url(:medium) %>
 </div>
 <%= link_to 'Back', posts_path %>

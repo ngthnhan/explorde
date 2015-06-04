@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, value: "[New Title]" %>
   </div>
   <div class="field">
     <%= f.label :resolution_level, "Level of Details" %><br>
-    <%= f.number_field :resolution_level, in: 4..6 %>
+    <%= f.number_field :resolution_level, value: 5, in: 4..6 %>
   </div>
 	<div class="field">
     <%= f.label :image %><br>
