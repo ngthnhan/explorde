@@ -8,7 +8,7 @@ $(document).on("ready, page:change", function() {
 	var canvas = document.getElementById("mainCanvas");
 	var ctx = canvas.getContext("2d");
 	var red = 0, green = 1, blue = 2;
-	canvas.addEventListener("click", function(e){
+	canvas.addEventListener("mousemove", function(e){
 
 	    var x;
 	    var y;
@@ -72,7 +72,7 @@ $(document).on("ready, page:change", function() {
 		var level = Math.log2(512/matched_corner[2]);
 		var row = matched_corner[1]/matched_corner[2];
 		var col = matched_corner[0]/matched_corner[2];
-
+		var background = pixel_matrices[level][row][col];
 		//level row col of the new ones
 		var lrc = [[level+1,row*2+0,col*2+0],
 				[level+1,row*2+0,col*2+1],
@@ -90,6 +90,9 @@ $(document).on("ready, page:change", function() {
 		//erase the original circle
 		//old diameter: diameter*2 is used to clear rectangle on canvas
 		ctx.clearRect(matched_corner[0], matched_corner[1], diameter*2, diameter*2);
+		var rgb = "rgb(" + Math.floor(background[red]+25) + "," + Math.floor(background[green]+25) + "," + Math.floor(background[blue]+25) + ")";
+		ctx.fillStyle = rgb;
+		ctx.fillRect(matched_corner[0], matched_corner[1], diameter*2, diameter*2);
 		//draw new items
 		for (var i = 0; i < 4; i++){
 			var level = lrc[i][0];

@@ -7,7 +7,7 @@
 
 <div class="image-container">
 	<%= tag :img, id: "resolution_level", style: "display: none", data: { resolution_level: @post.resolution_level } %>
-	<%= content_tag :canvas, " ", id: "data", width: 512, height: 512, data: { pixel_matrix: @post.pixel_matrices } %>
+	<%= content_tag :canvas, " ", id: "data", style: "display: none", data: { pixel_matrix: @post.pixel_matrices } %>
 
 	<%= content_tag :canvas, " ", id: "mainCanvas", width: 512, height: 512, data: { pixel_matrix: @post.pixel_matrices[0] } %>
 	<%= image_tag @post.image.url(:medium) %>
