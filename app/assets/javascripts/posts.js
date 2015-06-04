@@ -8,6 +8,8 @@ $(document).on("ready, page:change", function() {
 	// Must be divisible
 	var STEP = SIZE / MAX_RESOLUTION;
 	var maskArray = [];
+	var backgroundOpacity = 0;
+	var backgroundRGB;
 	initializeMaskArray();
 
 	function initializeMaskArray() {
@@ -72,8 +74,13 @@ $(document).on("ready, page:change", function() {
 			ctx.arc(rad, rad, rad, 0, TWO_PI);
 			var pixel = pixelMatrices[0][0][0];
 			ctx.closePath();
-			ctx.fillStyle = "rgb(" + Math.floor(pixel[red]) + "," + Math.floor(pixel[green]) + "," + Math.floor(pixel[blue]) + ")";
+			var rgb = Math.floor(pixel[red]) + "," + Math.floor(pixel[green]) + "," + Math.floor(pixel[blue]);
+			ctx.fillStyle = "rgb(" + rgb + ")";
 			ctx.fill();
+			
+			backgroundRGB = rgb;
+			// Set up background for canvas
+			$("#main-canvas").css("background-color", "rgba(" + rgb + "," + backgroundOpacity + ")");
 		} else {
 			return;
 		}
@@ -86,6 +93,8 @@ $(document).on("ready, page:change", function() {
 			var pos = new mousePos(x, y);
 			if (canExplode(pos)) {
 				explode(pos.getCell());
+				backgroundOpacity += 0.0015;
+				$("#main-canvas").css("background-color", "rgba(" + backgroundRGB + "," + backgroundOpacity + ")");
 			}
 		});
 

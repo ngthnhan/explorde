@@ -5,9 +5,9 @@
 	<%= @post.title %>
 </div>
 <div class="logging"></div>
-<div class="image-container">
+<div class="canvas-container">
 	<%= content_tag :canvas, " ", id: "main-canvas", width: 512, height: 512, data: { pixel_matrices: @post.pixel_matrices,
 																																									  resolution_level: @post.resolution_level } %>
-	<%= image_tag @post.image.url(:medium) %>
+<%= image_tag @post.image.url(:medium) %>
 </div>
 <%= link_to 'Back', posts_path %>
