@@ -39,8 +39,8 @@ $(document).on("ready, page:change", function() {
 		this.y = y;
 		this.getCell = function() {
 			// ~~(a/b) for integer division
-			var row = Math.floor(this.x / STEP);		
-			var col = Math.floor(this.y / STEP);
+			var row = ~~(this.x / STEP);		
+			var col = ~~(this.y / STEP);
 
 			return new basicCell(level, row, col);
 		};
@@ -50,15 +50,18 @@ $(document).on("ready, page:change", function() {
 		var cell = pos.getCell();
 		var lvl = cell.getLevel();
 		
-		var cur_r = cell.row / (MAX_RESOLUTION / Math.pow(2, lvl));
-		var cur_c = cell.col / (MAX_RESOLUTION / Math.pow(2, lvl));
+		var cur_r = ~~(cell.row / (MAX_RESOLUTION / Math.pow(2, lvl)));
+		var cur_c = ~~(cell.col / (MAX_RESOLUTION / Math.pow(2, lvl)));
 
 		// pos is in pixel_matrices[lvl][cur_r][cur_c]
 		var radius = SIZE / (Math.pow(2, lvl + 1));
 		var x = (2 * cur_c + 1) * radius;
 		var y = (2 * cur_r + 1) * radius;
-
-		var isTouched = (x - pos.x)*(x-pos.x) + (y - pos.y)*(y - pos.y) <= radius * radius;
+		
+		console.log("X, Y: " + x + "," + y);
+		console.log("Radius: " + radius);
+		var isTouched = (x-pos.x)*(x-pos.x) + (y-pos.y)*(y-pos.y) <= radius*radius;
+		
 		console.log("Level: " + level + "\nMouse position: " + pos.x + " x " + pos.y + "in level " + level + "\nTouch: " + isTouched);
 	}
 
