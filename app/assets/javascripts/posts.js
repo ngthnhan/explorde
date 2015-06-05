@@ -21,7 +21,6 @@ $(document).on("ready, page:change", function() {
 			}
 			maskArray.push(row_cells.slice(0, row_cells.length));
 		}
-		// console.log(maskArray);
 	}
 
 	function basicCell(r, c) {
@@ -58,7 +57,6 @@ $(document).on("ready, page:change", function() {
 		
 		var isTouched = (x-pos.x)*(x-pos.x) + (y-pos.y)*(y-pos.y) <= radius*radius;
 		return isTouched && lvl < MAX_LEVEL;	
-		// console.log("Level: " + level + "\nMouse position: " + pos.x + " x " + pos.y + "\nTouch: " + isTouched);
 	}
 
 	function draw() {
@@ -118,7 +116,6 @@ $(document).on("ready, page:change", function() {
 			var size_factor = SIZE / Math.pow(2, lvl);
 			var starting_x = starting_row * size_factor;
 			var starting_y = starting_col * size_factor;
-			console.log(starting_x + "," + starting_y + "," + size_factor + "," + size_factor);
 			ctx.clearRect(starting_x, starting_y, size_factor, size_factor);
 			
 			var row, col;
@@ -127,7 +124,6 @@ $(document).on("ready, page:change", function() {
 				col = 2 * starting_row + i;
 				for (var j = 0; j < 2; j++) {
 					row = 2 * starting_col + j; 
-					console.log("Next: " + (lvl + 1) + " - " + row + "," + col);
 					var pixel = pixelMatrices[lvl+1][row][col];
 					ctx.beginPath();
 					ctx.moveTo((2 * col + 1) * radius, row * radius);
