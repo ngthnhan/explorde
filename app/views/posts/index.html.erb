@@ -7,20 +7,17 @@
 				<%= link_to post_path(post) do %>
 				<%= image_tag post.image.url(:medium) %>
 				<% end %>
-				<div class="icon-bar two-up label-right">
-					<%= link_to like_post_path(post),class: "item", method: :put do %>
-				    <%= image_tag 'like.svg' %>
-				    <label>
-							<%= post.get_upvotes.size %>
-						</label>
-				  <%end%>
-				  <%= link_to like_post_path(post), class: "item", method: :put do %>
-				    <%= image_tag 'dislike.svg' %>
-				    <label> 
-				    	<%= post.get_downvotes.size %>
-				    </label>
-				  <%end%>
-				</div>
+				<% @rating = post.get_upvotes.size - post.get_downvotes.size %>
+				<div>
+					<% if @rating > 0 %>
+					  <%= image_tag 'like.svg' %>
+					<% else %>
+						<%= image_tag 'dislike.svg' %>
+					<%end%>  	    
+					<span> 
+					  <%= @rating %>
+				  </span>
+			  </div>
 			</div>
 		</li>
 	<% end %>
