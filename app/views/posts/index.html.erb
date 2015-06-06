@@ -1,30 +1,16 @@
-<%  def choose_thump (post) %>
-<%    rating = post.get_upvotes.size - post.get_downvotes.size %>	
-<%  if rating > 0 %>
-<%	  image = 'like.svg' %>
-<%  else %>
-<%	  image = 'like.svg' %>
-<%  end%> 
-<%  return rating, image %>
-<%  end%>	 
-
 <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 	<% @posts.each do |post| %>
 		<li>	
-			<div class="panel">
-				<h6 class="text-center"><strong><%= truncate post.title, length: 40 %></strong></h6>
-				<small class="author">Posted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %></small>
-				<%= link_to post_path(post) do %>
-				<%= image_tag post.image.url(:medium) %>
-				<% end %>
-				<% @rating, @image = choose_thump(post) %>
-				<div>
-					<%= image_tag @image %>	    
-					<span> 
-					  <%= @rating %>
-				  </span>
-			  </div>
-			</div>
+			<%= link_to post_path(post) do %>
+				<div class="panel">
+					<h6 class="text-center"><strong><%= truncate post.title, length: 40 %></strong></h6>
+					<small class="author">Posted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %></small>
+					<%= image_tag post.image.url(:medium) %>
+					<div class="rating">
+						<%= display_rating(post) %>
+					</div>
+				</div>
+			<% end %>
 		</li>
 	<% end %>
 </ul>

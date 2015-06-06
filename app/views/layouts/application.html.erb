@@ -53,7 +53,9 @@
 					<% flash.each do |name, msg| %>
 						<div class="alert-box radius"><%= msg %></div>
 					<% end %>
-					<%= yield %>
+					<div class="<%= controller.controller_name %>">
+						<%= yield %>
+					</div>
 				</div>
 			</div>
 		</div>	
