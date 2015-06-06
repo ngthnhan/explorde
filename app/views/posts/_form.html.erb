@@ -1,8 +1,7 @@
-<%= simple_form_for @post, url: posts_path, html: { multipart: true } do |f| %>
+<%= simple_form_for @post, url: posts_path, wrapper: :horizontal_form, html: { multipart: true } do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
       <ul>
       <% @post.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -14,6 +13,6 @@
   <%= f.input :title, placeholder: "[New Title]" %><br>
 	<%= f.input :resolution_level, label: "Level of Details", input_html: { value: 6, in: 5..7 } %>
 	<%= f.input :image %>
-	<%= f.button :submit %>
+	<%= f.button :submit, input_html: { class: "button radius success" } %>
   
 <% end %>
