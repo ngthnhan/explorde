@@ -13,50 +13,49 @@
   </head>
 
   <body>
-		<div class="sticky">
-			<nav class="top-bar" role="navigation" data-topbar>
-				<ul class="title-area">
-					<li class="name">
-						<h1><%= link_to "Explorde", root_path %></h1>
-					</li>
-					<li class="toggle-topbar menu-icon"><a href=""><span>Menu</span></a></li>
+		<nav class="top-bar" role="navigation" data-topbar>
+			<ul class="title-area">
+				<li class="name">
+					<h1><%= link_to "Explorde", root_path %></h1>
+				</li>
+				<li class="toggle-topbar menu-icon"><a href=""><span>Menu</span></a></li>
+			</ul>
+
+			<section class="top-bar-section">
+				<ul class="left">
+					<li class="divider"></li>
+					<li><%= link_to "Hot", root_path %></li>
+					<li class="divider"></li>
+					<li><%= link_to "Trending", root_path %></li>
+					<li class="divider"></li>
+					<li><%= link_to "Fresh", root_path %></li>
+					<li class="divider"></li>
 				</ul>
-
-				<section class="top-bar-section">
-					<ul class="left">
+				<ul class="right">
+					<% if user_signed_in? %>
+						<li class="has-form"><%= link_to "New Post", new_post_path, class: "button success radius" %></li>
 						<li class="divider"></li>
-						<li><%= link_to "Hot", root_path %></li>
+						<li><%= link_to "Account Setting", edit_user_registration_path %></li>
 						<li class="divider"></li>
-						<li><%= link_to "Trending", root_path %></li>
+						<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+					<% else %>
+						<li><%= link_to "Sign In", new_user_session_path %></li>
 						<li class="divider"></li>
-						<li><%= link_to "Fresh", root_path %></li>
-					</ul>
-					<ul class="right">
-						<% if user_signed_in? %>
-							<li><%= link_to "New Post", new_post_path, class: "button radius success" %></li>
-							<li class="divider"></li>
-							<li><%= link_to "Account Setting", edit_user_registration_path %></li>
-							<li class="divider"></li>
-							<li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-						<% else %>
-							<li><%= link_to "Sign In", new_user_session_path %></li>
-							<li class="divider"></li>
-							<li><%= link_to "Sign Up", new_user_registration_path %></li>
-						<% end %>
-					</ul>
-				</section>
-			</nav>
-		</div>
+						<li class="active"><%= link_to "Sign Up", new_user_registration_path %></li>
+					<% end %>
+				</ul>
+			</section>
+		</nav>
 
-		<div class="row">  	
-			<div class="large-12 columns">
-				<% flash.each do |name, msg| %>
-					<div class="alert-box radius"><%= msg %></div>
-				<% end %>
-
-				<%= yield %>
+		<div class="container">
+			<div class="row">  	
+				<div class="large-12 columns">
+					<% flash.each do |name, msg| %>
+						<div class="alert-box radius"><%= msg %></div>
+					<% end %>
+					<%= yield %>
+				</div>
 			</div>
-		</div>
-
-  </body>
+		</div>	
+	</body>
 </html>

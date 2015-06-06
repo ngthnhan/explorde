@@ -1,12 +1,12 @@
 <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 	<% @posts.each do |post| %>
 		<li>
-			<div class="panel radius">
-				<h6 class="text-center"><strong><%= truncate post.title, length: 40 %></strong></h6>	
-				<%= link_to post_path(post) do %>
+			<%= link_to post_path(post) do %>
+				<div class="panel radius">
+					<h6 class="text-center"><strong><%= truncate post.title, length: 40 %></strong></h6>	
 					<%= image_tag post.image.url(:medium) %>
-				<% end %>
-			</div>
+				</div>
+			<% end %>
 		</li>
 	<% end %>
 </ul>
