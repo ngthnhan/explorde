@@ -1,3 +1,13 @@
+<%  def choose_thump (post) %>
+<%    rating = post.get_upvotes.size - post.get_downvotes.size %>	
+<%  if rating > 0 %>
+<%	  image = 'like.svg' %>
+<%  else %>
+<%	  image = 'like.svg' %>
+<%  end%> 
+<%  return rating, image %>
+<%  end%>	 
+
 <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 	<% @posts.each do |post| %>
 		<li>	
@@ -7,13 +17,9 @@
 				<%= link_to post_path(post) do %>
 				<%= image_tag post.image.url(:medium) %>
 				<% end %>
-				<% @rating = post.get_upvotes.size - post.get_downvotes.size %>
+				<% @rating, @image = choose_thump(post) %>
 				<div>
-					<% if @rating > 0 %>
-					  <%= image_tag 'like.svg' %>
-					<% else %>
-						<%= image_tag 'dislike.svg' %>
-					<%end%>  	    
+					<%= image_tag @image %>	    
 					<span> 
 					  <%= @rating %>
 				  </span>
@@ -22,3 +28,5 @@
 		</li>
 	<% end %>
 </ul>
+
+   
