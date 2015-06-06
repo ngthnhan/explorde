@@ -24,13 +24,16 @@
 
 				<section class="top-bar-section">
 					<ul class="left">
+						<li class="divider"></li>
 						<li><%= link_to "Hot", root_path %></li>
+						<li class="divider"></li>
 						<li><%= link_to "Trending", root_path %></li>
+						<li class="divider"></li>
 						<li><%= link_to "Fresh", root_path %></li>
 					</ul>
 					<ul class="right">
 						<% if user_signed_in? %>
-							<li><%= link_to "New Post", new_post_path %></li>
+							<li><%= link_to "New Post", new_post_path, class: "button radius success" %></li>
 							<li class="divider"></li>
 							<li><%= link_to "Account Setting", edit_user_registration_path %></li>
 							<li class="divider"></li>

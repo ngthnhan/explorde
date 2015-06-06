@@ -1,11 +1,10 @@
-<div class="title">
-	<strong>Title:</strong>
-	<%= @post.title %>
+<h1 class="text-center"><%= @post.title %></h1>
+<div class="row">
+	<div class="large-2 columns"><h2>&lt; Prev</h2></div>
+	<div class="text-center canvas-container large-8 columns">
+		<%= content_tag :canvas, " ", id: "main-canvas", width: 512, height: 512, data: { pixel_matrices: @post.pixel_matrices,
+																																										resolution_level: @post.resolution_level } %>
+	</div>
+	<div class="large-2 columns"><h2>&gt; Next</h2></div>
 </div>
-<div class="logging"></div>
-<div class="canvas-container">
-	<%= content_tag :canvas, " ", id: "main-canvas", width: 512, height: 512, data: { pixel_matrices: @post.pixel_matrices,
-																																									  resolution_level: @post.resolution_level } %>
-<%= image_tag @post.image.url(:medium) %>
-</div>
-<%= link_to 'Back', posts_path %>
+
