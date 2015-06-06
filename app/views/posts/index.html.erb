@@ -1,12 +1,26 @@
 <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
 	<% @posts.each do |post| %>
-		<li>
-			<%= link_to post_path(post) do %>
-				<div class="panel radius">
-					<h6 class="text-center"><strong><%= truncate post.title, length: 40 %></strong></h6>	
-					<%= image_tag post.image.url(:medium) %>
+		<li>	
+			<div class="panel">
+				<h6 class="text-center"><strong><%= truncate post.title, length: 40 %></strong></h6>	
+				<%= link_to post_path(post) do %>
+				<%= image_tag post.image.url(:medium) %>
+				<% end %>
+				<div class="icon-bar two-up label-right">
+					<%= link_to like_post_path(post),class: "item", method: :put do %>
+				    <%= image_tag 'like.svg' %>
+				    <label>
+							<%= post.get_upvotes.size %>
+						</label>
+				  <%end%>
+				  <%= link_to like_post_path(post), class: "item", method: :put do %>
+				    <%= image_tag 'dislike.svg' %>
+				    <label> 
+				    	<%= post.get_downvotes.size %>
+				    </label>
+				  <%end%>
 				</div>
-			<% end %>
+			</div>
 		</li>
 	<% end %>
 </ul>
