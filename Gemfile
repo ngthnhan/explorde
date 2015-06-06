@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 gem 'paperclip', '~> 4.2.1'
 gem 'rmagick', '~> 2.15.1'
 gem 'devise', '~> 3.5.1'
+gem 'simple_form'
+gem 'foundation-rails'
 
 gem 'rails', '4.2.1'
 gem 'sqlite3'

@@ -1,4 +1,4 @@
-<%= form_for @post, url: posts_path, html: { multipart: true } do |f| %>
+<%= simple_form_for @post, url: posts_path, html: { multipart: true } do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -11,19 +11,9 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title, value: "[New Title]" %>
-  </div>
-  <div class="field">
-    <%= f.label :resolution_level, "Level of Details" %><br>
-    <%= f.number_field :resolution_level, value: 6, in: 5..7 %>
-  </div>
-	<div class="field">
-    <%= f.label :image %><br>
-    <%= f.file_field :image %>
-  </div>
-	<div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.input :title, placeholder: "[New Title]" %><br>
+	<%= f.input :resolution_level, label: "Level of Details", input_html: { value: 6, in: 5..7 } %>
+	<%= f.input :image %>
+	<%= f.button :submit %>
+  
 <% end %>
