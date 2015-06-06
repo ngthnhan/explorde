@@ -6,4 +6,18 @@
 	</div>
 	<div class="large-2 columns"><h2>&gt; Next</h2></div>
 </div>
+<div class="icon-bar two-up label-right">
+	<%= link_to like_post_path(@post),class: "item", method: :put do %>
+		<%= image_tag 'like.svg' %>
+		<label>
+			<%= @post.get_upvotes.size %>
+		</label>
+		<%end%>
+	<%= link_to dislike_post_path(@post), class: "item", method: :put do %>
+		<%= image_tag 'dislike.svg' %>
+		<label> 
+			<%= @post.get_downvotes.size %>
+		</label>
+		<%end%>
+</div>
 
