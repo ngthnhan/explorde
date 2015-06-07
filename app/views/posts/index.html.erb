@@ -4,7 +4,7 @@
 			<%= link_to post_path(post) do %>
 				<div class="panel">
 					<h6 class="text-center"><strong><%= truncate post.title, length: 40 %></strong></h6>
-					<small class="author">Posted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.name %></small>
+					<small class="author">Posted <%= time_ago_in_words(post.created_at) %> ago by <%= post.user.username %></small>
 					<%= image_tag post.image.url(:medium) %>
 					<div class="rating">
 						<%= display_rating(post) %>

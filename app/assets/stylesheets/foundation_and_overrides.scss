@@ -1486,3 +1486,14 @@ $topbar-divider-border-top: solid 1px scale-color($topbar-bg-color, $lightness: 
 // $include-legacy-visibility-classes: true;
 
 @import 'foundation';
+
+.hint {
+	margin: -14px 0 12px;
+	font-size: 12px;
+	font-style: italic;
+	color: $steel;
+}
+
+.error + .hint {
+	margin: 0 0 12px;
+}
