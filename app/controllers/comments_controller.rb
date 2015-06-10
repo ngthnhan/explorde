@@ -1,6 +1,11 @@
 class CommentsController < ApplicationController
-	before_action :set_post, only: [:create, :destroy, :edit]
+	before_action :set_post, only: [:index, :create, :destroy, :edit]
 	before_action :set_comment, only: [:edit, :destroy, :update]
+
+	def index
+		@comments = @post.comments
+	end
+	
 	# POST /posts/:post_id/comments
 	# POST /posts/:post_id/comments.json
 	def create
@@ -21,7 +26,8 @@ class CommentsController < ApplicationController
   # DELETE /posts/:post_id/comments/1
   # DELETE /posts/:post_id/comments/1.json
 	def destroy
-		@comment = @post.comments.find(params[:id])
+		@comment.destroy
+
 		respond_to do |format|
 			format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
 			format.json { head :no_content }
@@ -31,6 +37,10 @@ class CommentsController < ApplicationController
 	private
 	def set_post
 		@post = Post.find(params[:post_id])
+	end
+
+	def set_comment
+		@comment = @post.comments.find(params[:id])
 	end
 
 	def comment_params

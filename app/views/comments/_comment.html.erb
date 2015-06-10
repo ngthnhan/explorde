@@ -4,8 +4,8 @@
 			<strong class="left"><%= link_to comment.user.username, user_path(comment.user) %></strong>
 			<% if current_user == comment.user %>
 				<div class="right">
-						<%= fa_icon "pencil"  %>
-						<%= fa_icon "times" %>
+						<%= fa_icon "pencil" %>
+						<%= link_to fa_icon("times"), [comment.post, comment], method: :delete, data: { confirm: "Are you sure?" } %>
 				</div>
 			<% end %>
 		</div>
