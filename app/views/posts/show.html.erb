@@ -14,9 +14,11 @@
 				</div>
 			</div>
 			<hr />
-			<div class="comment-form clearfix">
-				<%= render "comments/form" %>
-			</div>
+			<% if current_user %>
+				<div class="comment-form clearfix">
+					<%= render "comments/form" %>
+				</div>
+			<% end %>
 			<ul>
 				<%= render @post.comments.order("created_at desc") %>
 			</ul>
