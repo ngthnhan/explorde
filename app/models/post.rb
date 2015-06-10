@@ -15,4 +15,6 @@ class Post < ActiveRecord::Base
 	def next_post
 		Post.where("id > ?", id).first
 	end
+
+	self.per_page = 1
 end

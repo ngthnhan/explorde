@@ -14,5 +14,6 @@ class User < ActiveRecord::Base
   	length: { in: 3..20 }													# Length 3-20
   has_many :posts
 
+  self.per_page = 1
 
   end
