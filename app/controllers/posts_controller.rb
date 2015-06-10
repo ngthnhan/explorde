@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   require 'RMagick'
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :unlike, :dislike, :undislike]
 	before_action :authenticate_user!, except: [:show, :index]
 
   # GET /posts
@@ -64,17 +64,25 @@ class PostsController < ApplicationController
     end
   end
 
-  def upvote
-    @post = Post.find(params[:id])
-    @post.upvote_by current_user
+  def like
+    @post.liked_by current_user
     redirect_to @post
   end
 
-  def downvote
-    @post = Post.find(params[:id])
-    @post.downvote_by current_user
+  def unlike
+  	@post.unliked_by current_user
+  	redirect_to @post
+	end
+
+  def dislike
+    @post.disliked_by current_user
     redirect_to @post
   end
+
+  def undislike
+  	@post.undisliked_by current_user
+  	redirect_to @post
+	end
 
   private
     # Use callbacks to share common setup or constraints between actions.

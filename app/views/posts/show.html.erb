@@ -1,23 +1,37 @@
-<h1 class="text-center"><%= @post.title %></h1>
 <div class="row">
-	<div class="large-2 columns"><h2>&lt; Prev</h2></div>
-	<div class="text-center canvas-container large-8 columns">
-		<%= content_tag :canvas, " ", id: "main-canvas", width: 512, height: 512, data: { pixel_matrices: @post.pixel_matrices, resolution_level: @post.resolution_level } %>
+	<div class="medium-8 columns">
+		<div class="text-center canvas-container panel">
+			<%= content_tag :canvas, " ", id: "main-canvas", width: 512, height: 512, data: { pixel_matrices: @post.pixel_matrices, resolution_level: @post.resolution_level } %>
+		</div>
+		<hr />
+		<div class="comments">
+			<h1>This is a place holder for comments section</h1>
+		</div>
 	</div>
-	<div class="large-2 columns"><h2>&gt; Next</h2></div>
+	<div class="medium-4 columns">
+		<div class="row collapse">
+			<div class="medium-2 medium-offset-1 columns"><%= image_tag "avatar_male.png", size: "75x75" %></div>
+			<div class="medium-9 columns">
+				<h4><%= @post.title %></h4>
+				<div class="by-line">By <%= link_to @post.user.username, user_path(@post.user) %></div>
+			</div>
+		</div>
+		<hr />
+		<div class="info">
+			<div class="row collapse">
+				<div class="medium-6 columns">
+					<%= display_rating @post %>
+				</div>
+				<div class="medium-6 columns">
+					<% if user_signed_in? %>
+						<div class="text-right">
+							<%= get_user_vote_action @post %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+			<hr />
+			<p>Next | Prev</p>
+		</div>
+	</div>
 </div>
-<div class="icon-bar two-up label-right">
-	<%= link_to like_post_path(@post),class: "item", method: :put do %>
-		<%= image_tag 'like.svg' %>
-		<label>
-			<%= @post.get_upvotes.size %>
-		</label>
-		<%end%>
-	<%= link_to dislike_post_path(@post), class: "item", method: :put do %>
-		<%= image_tag 'dislike.svg' %>
-		<label> 
-			<%= @post.get_downvotes.size %>
-		</label>
-		<%end%>
-</div>
-

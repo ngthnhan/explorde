@@ -48,15 +48,11 @@
 		</nav>
 
 		<div class="container">
-			<div class="row">  	
-				<div class="large-12 columns">
-					<% flash.each do |name, msg| %>
-						<div class="alert-box radius"><%= msg %></div>
-					<% end %>
-					<div class="<%= controller.controller_name %>">
-						<%= yield %>
-					</div>
-				</div>
+			<% flash.each do |name, msg| %>
+				<div class="alert-box radius"><%= msg %></div>
+			<% end %>
+			<div class="<%= controller.controller_name %>">
+				<%= yield %>
 			</div>
 		</div>	
 	</body>

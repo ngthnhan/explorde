@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: [:slugged]
   validates :slug, presence: true, uniqueness: true
+  acts_as_voter
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
