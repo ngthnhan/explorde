@@ -3,9 +3,9 @@
 		<li>	
 			<div class="panel">
 				<%= link_to post_path(post) do %>
-					<h6 class="text-center"><strong><%= truncate post.title, length: 40 %></strong></h6>
+					<h6 class="text-center"><strong><%= truncate post.title, length: 30 %></strong></h6>
 				<% end %>
-				<small class="author">Posted <%= time_ago_in_words(post.created_at) %> ago by <%= link_to post.user.username, user_path(post.user) %></small>
+				<small class="author"><i>Posted <%= time_ago_in_words(post.created_at) %> ago by <%= link_to post.user.username, user_path(post.user) %></i></small>
 				<%= link_to post_path(post) do %>
 					<%= image_tag post.image.url(:medium) %>
 				<% end %>
