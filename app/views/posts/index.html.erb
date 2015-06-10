@@ -1,4 +1,6 @@
 <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-4">
+<%= will_paginate @collection, renderer: FoundationPagination::Rails %>
+
 	<% @posts.each do |post| %>
 		<li>	
 			<div class="panel">

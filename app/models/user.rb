@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   	format: { with: /\A[a-zA-Z0-9_-]+\Z/ },				# Only accept alphanumeric, -, _. 
   	length: { in: 3..20 }													# Length 3-20
   has_many :posts, dependent: :destroy
-  has_many :comments, dependent: :destroy
+	has_many :comments, dependent: :destroy
 
-  end
+	self.per_page = 1
+
+end
