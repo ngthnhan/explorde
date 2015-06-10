@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="medium-8 columns">
+		<h4><strong><%= @post.title %></strong></h4>
 		<div class="text-center canvas-container panel">
 			<%= content_tag :canvas, " ", id: "main-canvas", width: 512, height: 512, data: { pixel_matrices: @post.pixel_matrices, resolution_level: @post.resolution_level } %>
 		</div>
@@ -10,10 +11,12 @@
 	</div>
 	<div class="medium-4 columns">
 		<div class="row collapse">
-			<div class="medium-2 medium-offset-1 columns"><%= image_tag "avatar_male.png", size: "75x75" %></div>
+			<div class="medium-3 columns"><%= image_tag "avatar_male.png", size: "100x100" %></div>
 			<div class="medium-9 columns">
-				<h4><%= @post.title %></h4>
-				<div class="by-line">By <%= link_to @post.user.username, user_path(@post.user) %></div>
+				<div class="byline">
+					<div>by <%= link_to @post.user.username, user_path(@post.user) %></div>
+					<small><i>posted on <%= @post.created_at.strftime "%b %d, %y" %></i></small>
+				</div>
 			</div>
 		</div>
 		<hr />
@@ -31,7 +34,14 @@
 				</div>
 			</div>
 			<hr />
-			<p>Next | Prev</p>
+			<div class="row collapse text-center">
+				<div class="medium-6 columns">
+					<%= link_to fa_icon("angle-double-left", text: "Prev"), @post.previous_post, class: "button success radius" %>
+				</div>
+				<div class="medium-6 columns">
+					<%= link_to raw("Next #{fa_icon("angle-double-right")}"), @post.next_post, class: "button success radius" %>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -7,4 +7,12 @@ class Post < ActiveRecord::Base
   validates :image, attachment_presence: true
   validates :resolution_level, numericality: { only_integer: true, in: 5..7 }
   serialize :pixel_matrices, Array
+
+	def previous_post
+		Post.where("id < ?", id).last
+	end
+
+	def next_post
+		Post.where("id > ?", id).first
+	end
 end

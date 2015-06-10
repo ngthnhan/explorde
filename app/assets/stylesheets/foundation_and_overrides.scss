@@ -124,11 +124,11 @@ $black       : #000000;
 // $info-color: #a0d3e8;
 
 // We use these to control various global styles
-$body-bg: $jet;
-$body-font-color: $jet;
-$body-font-family: $font-family-sans-serif;
-$body-font-weight: $font-weight-normal;
-$body-font-style: normal;
+// $body-bg: $light-gray;
+// $body-font-color: $white;
+// $body-font-family: $font-family-sans-serif;
+// $body-font-weight: $font-weight-normal;
+// $body-font-style: normal;
 
 // We use this to control font-smoothing
 // $font-smoothing: antialiased;
@@ -1400,8 +1400,8 @@ $body-font-style: normal;
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-$topbar-bg-color: #212D48;
-$topbar-bg: $topbar-bg-color;
+// $topbar-bg-color: $jet;
+// $topbar-bg: $topbar-bg-color;
 
 // Height and margin
 // $topbar-height: rem-calc(45);
@@ -1412,7 +1412,7 @@ $topbar-title-weight: $font-weight-bold;
 $topbar-title-font-size: rem-calc(17);
 
 // Set the link colors and styles for top-level nav
-// $topbar-link-color: $white;
+$topbar-link-color: $white-smoke;
 // $topbar-link-color-hover: $white;
 // $topbar-link-color-active: $white;
 // $topbar-link-color-active-hover: $white;
@@ -1442,7 +1442,7 @@ $topbar-title-font-size: rem-calc(17);
 // $topbar-dropdown-toggle-size: 5px;
 // $topbar-dropdown-toggle-color: $white;
 // $topbar-dropdown-toggle-alpha: .4;
-
+// 
 // $topbar-dropdown-label-color: $monsoon;
 // $topbar-dropdown-label-text-transform: uppercase;
 // $topbar-dropdown-label-font-weight: $font-weight-bold;
@@ -1469,8 +1469,8 @@ $topbar-title-font-size: rem-calc(17);
 // $topbar-input-height: rem-calc(28);
 
 // Divider Styles
-$topbar-divider-border-bottom: solid 1px scale-color($topbar-bg-color, $lightness: 13%);
-$topbar-divider-border-top: solid 1px scale-color($topbar-bg-color, $lightness: -50%);
+// $topbar-divider-border-bottom: solid 1px scale-color($topbar-bg-color, $lightness: 13%);
+// $topbar-divider-border-top: solid 1px scale-color($topbar-bg-color, $lightness: -70%);
 
 // Sticky Class
 // $topbar-sticky-class: ".sticky";
