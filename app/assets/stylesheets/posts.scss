@@ -13,4 +13,20 @@
 			margin-bottom: -10px;
 		}
 	}
+
+	.comments {
+		ul {
+			li {
+				margin: -1em 0em -1em;
+			}
+			list-style-type: none;
+		}
+
+		.comment-header {
+			margin-bottom: -1.25em;
+			.comment-sort {
+				font-size: 0.75em;
+			}
+		}
+	}
 }

@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: { case_sensitive: false }, 
   	format: { with: /\A[a-zA-Z0-9_-]+\Z/ },				# Only accept alphanumeric, -, _. 
   	length: { in: 3..20 }													# Length 3-20
-  has_many :posts
-
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   end

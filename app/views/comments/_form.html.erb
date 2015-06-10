@@ -1,0 +1,11 @@
+<%= form_for [@post, @post.comments.new] do |f| %>
+	<div class="row collapse">
+		<div class="medium-10 columns">
+			<%= f.text_area :content, class: "radius" %>
+		</div>
+		 
+		<div class="medium-2 columns">
+			<%= f.submit "Comment", class: "button radius expand right" %>
+		</div>
+	</div>
+<% end %>

@@ -4,9 +4,22 @@
 		<div class="text-center canvas-container panel">
 			<%= content_tag :canvas, " ", id: "main-canvas", width: 512, height: 512, data: { pixel_matrices: @post.pixel_matrices, resolution_level: @post.resolution_level } %>
 		</div>
-		<hr />
 		<div class="comments">
-			<h1>This is a place holder for comments section</h1>
+			<div class="comment-header clearfix">
+				<strong class="left"><%= pluralize(@post.comments.count, "Comment") %> </strong>
+				<div class="comment-sort right">
+					<%= link_to "oldest", @post %>
+					<%= link_to "newest", @post %>
+					<%= link_to "liked", @post %>
+				</div>
+			</div>
+			<hr />
+			<div class="comment-form clearfix">
+				<%= render "comments/form" %>
+			</div>
+			<ul>
+				<%= render @post.comments.order("created_at desc") %>
+			</ul>
 		</div>
 	</div>
 	<div class="medium-4 columns">
