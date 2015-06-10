@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/users/:username", to: "users#show", as: 'user'
 
   resources :posts do 
-    resources :comments
+    resources :comments, except: [:show]
     member do 
       put "like", to: "posts#like"
       put "dislike", to: "posts#dislike"

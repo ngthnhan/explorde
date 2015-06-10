@@ -1,9 +1,7 @@
-<h1>All Users</h1>
-
-<%= will_paginate @collection, renderer: FoundationPagination::Rails %>
+<h1 class="text-center">All Users</h1>
 <ul>
 	<% @users.each do |user| %>
 		<li><%= link_to user.username, user_path(user) %></li>
 	<% end %>
 </ul>
-
+<%= will_paginate @collection, renderer: FoundationPagination::Rails %>
