@@ -1,0 +1,12 @@
+<div class="row collapse">
+	<div class="medium-6 columns">
+		<%= display_rating post %>
+	</div>
+	<div class="medium-6 columns">
+		<% if user_signed_in? %>
+			<div class="text-right">
+				<%= get_user_vote_action post %>
+			</div>
+		<% end %>
+	</div>
+</div>

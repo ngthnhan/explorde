@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   require 'RMagick'
   before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :unlike, :dislike, :undislike]
 	before_action :authenticate_user!, except: [:show, :index]
+	# after_action :rating_respond, only: [:like, :unlike, :dislike, :undislike]
 
   # GET /posts
   # GET /posts.json
@@ -64,24 +65,36 @@ class PostsController < ApplicationController
     end
   end
 
-  def like
-    @post.liked_by current_user
-    redirect_to @post
-  end
-
-  def unlike
-  	@post.unliked_by current_user
-  	redirect_to @post
+	def like
+		@post.liked_by current_user
+		respond_to do |format|
+			format.html { redirect_to @post }
+			format.js { render action: "rating_reload" }
+		end	
 	end
 
-  def dislike
-    @post.disliked_by current_user
-    redirect_to @post
-  end
+	def unlike
+		@post.unliked_by current_user
+		respond_to do |format|
+			format.html { redirect_to @post }
+			format.js { render action: "rating_reload" }
+		end	
+	end
 
-  def undislike
-  	@post.undisliked_by current_user
-  	redirect_to @post
+	def dislike
+		@post.disliked_by current_user
+		respond_to do |format|
+			format.html { redirect_to @post }
+			format.js { render action: "rating_reload" }
+		end	
+	end
+
+	def undislike
+		@post.undisliked_by current_user
+		respond_to do |format|
+			format.html { redirect_to @post }
+			format.js { render action: "rating_reload" }
+		end	
 	end
 
 
@@ -95,6 +108,13 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :image, :resolution_level, :name)
     end
+
+    def rating_respond
+			respond_to do |format|
+				format.html { redirect_to @post }
+				format.js { render action: "rating_reload" }
+			end
+		end
 
 		# TODO: Refactor this shit. Using Ruby style!
     def pixelate
