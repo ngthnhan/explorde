@@ -15,6 +15,37 @@
  */
 @import "font-awesome";
 
-body .container {
-	padding: 15px;
+body {
+	.container {
+		padding: 15px;
+	}
+
+	#purr-container {
+		position: fixed;
+		width: 30%;
+		height: 5rem;
+		top: 12%;
+		right: 1%;
+		pointer-events: none;
+
+		.notice {
+			background-color: rgba(67, 172, 106, 0.85);
+		}
+
+		.alert {
+			background-color: rgba(240, 65, 36, 0.85);
+		}
+
+		.purr {
+			height: 100%;
+			width: 100%;
+
+			text-align: center;
+			padding: 1.5rem 0;
+			font-size: 1.25rem;
+			font-weight: bold;
+			color: white;
+			margin: 1rem 0;
+		}
+	}
 }

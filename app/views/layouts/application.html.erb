@@ -48,12 +48,17 @@
 		</nav>
 
 		<div class="container">
-			<% flash.each do |name, msg| %>
-				<div class="alert-box radius"><%= msg %></div>
-			<% end %>
 			<div class="<%= controller.controller_name %>">
 				<%= yield %>
 			</div>
 		</div>	
+
+		<div id="purr-container">
+				<% if notice %>
+					<div class="purr notice"><%= notice %></div>
+				<% elsif alert %>
+					<div class="purr alert"><%= alert %></div>
+				<% end %>
+		</div>
 	</body>
 </html>

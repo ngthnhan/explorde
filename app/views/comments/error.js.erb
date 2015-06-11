@@ -1,1 +1,3 @@
-alert("Error");
+var errors_msg = "<%= raw @comment.errors.full_messages.join('\n') %>";
+var container = $(BestInPlaceEditor.defaults.purrErrorContainer).html(errors_msg);
+container.purr();

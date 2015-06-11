@@ -14,7 +14,18 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require jquery.purr
 //= require best_in_place
+//= require best_in_place.purr
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+// Override Best In Place default purr wrapper
+BestInPlaceEditor.defaults.purrErrorContainer =  "<div class='alert'></div>";
+
+$(function(){ 
+	$(document).foundation(); 
+	if ($('.purr').length !== 0) {
+		setTimeout(function() { $(".purr").fadeOut(500, function() { $(this).remove() }); }, 4000);
+	}
+});
+
