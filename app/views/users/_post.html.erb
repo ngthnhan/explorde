@@ -1,7 +1,7 @@
 <li>	
 	<div class="panel">
 		<%= link_to post_path(post) do %>
-			<h6 class="text-center"><strong><%= truncate post.title, length: 40 %></strong></h6>
+			<h6 class="text-center"><strong><%= truncate post.title, length: 30 %></strong></h6>
 		<% end %>
 		<small class="author">Posted <%= time_ago_in_words(post.created_at) %> ago</small>
 		<%= link_to post_path(post) do %>
