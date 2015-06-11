@@ -4,12 +4,20 @@
 			<strong class="left"><%= link_to comment.user.username, user_path(comment.user) %></strong>
 			<% if current_user == comment.user %>
 				<div class="right">
-						<%= fa_icon "pencil" %>
-						<%= link_to fa_icon("times"), [comment.post, comment], method: :delete, data: { confirm: "Are you sure?" } %>
+					<%= fa_icon "pencil", class: "edit-comment-#{comment.id}" %>
+					<%= link_to fa_icon("times"), [comment.post, comment], method: :delete, data: { confirm: "Are you sure?" } %>
 				</div>
 			<% end %>
 		</div>
-		<div class="comment-content"><%= comment.content %></div>
+		<div class="comment-content ">
+			<%= best_in_place_if current_user == comment.user, comment, :content,
+				url: [comment.post, comment],
+				as: :textarea, inner_class: "radius",
+				ok_button: 'Save', ok_button_class: "button success radius",
+				use_confirm: false,
+				display_with: :simple_format,
+				activator: ".edit-comment-#{comment.id}" %>
+		</div>
 		<small><i><%= time_ago_in_words comment.created_at %> ago</i></small>
 	</li>
 	<hr />

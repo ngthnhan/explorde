@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require best_in_place
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

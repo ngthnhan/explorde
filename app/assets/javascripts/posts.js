@@ -1,4 +1,19 @@
 $(document).on("ready, page:change", function() {
+  jQuery(".best_in_place").best_in_place();
+
+  $(".best_in_place").bind("best_in_place:activate", function() {
+		// Find the OK-button and hide it
+		$(this).find("input[type=submit]").hide();
+		// Append instruction
+		$(this).append("<div class='comment-edit-help text-right'>Press <span class='keyword'>Enter</span> to save, <span class='keyword'>ESC</span> to cancel</div>");
+		$(this).find("textarea").keydown(function(e) {
+			if (e.keyCode == 13 && !e.shiftKey) {
+				e.preventDefault();
+				$(this).submit();
+			}
+		});
+	});
+
 	var TWO_PI = 2 * Math.PI;
 
 	var MAX_LEVEL = $("#main-canvas").data("resolution-level") - 1;

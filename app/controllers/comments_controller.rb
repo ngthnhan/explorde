@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-	before_action :set_post, only: [:index, :create, :destroy, :edit]
+	before_action :set_post, only: [:index, :create, :destroy, :edit, :update]
 	before_action :set_comment, only: [:edit, :destroy, :update]
 
 	def index
@@ -21,6 +21,18 @@ class CommentsController < ApplicationController
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
+	end
+
+	def update
+		respond_to do |format|
+			if @comment.update(comment_params)
+				format.html { redirect_to @post, notice: 'Comment was successfully updated.' }
+				format.json { respond_with_bip @comment }
+			else
+				format.html { render :edit }
+				format.json { respond_with_bip @comment }
+			end
+		end
 	end
 
   # DELETE /posts/:post_id/comments/1

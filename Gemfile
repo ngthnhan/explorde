@@ -8,6 +8,7 @@ gem 'simple_form'
 gem 'foundation-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'font-awesome-rails'
+gem 'best_in_place', '~> 3.0.3'
 
 gem 'rails', '4.2.1'
 gem 'sqlite3'
