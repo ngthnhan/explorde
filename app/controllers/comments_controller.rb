@@ -16,9 +16,11 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
+        format.js { render action: "reload" }
       else
         format.html { redirect_to @post }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
+        format.js { render action: "error" }
       end
     end
 	end
@@ -43,6 +45,7 @@ class CommentsController < ApplicationController
 		respond_to do |format|
 			format.html { redirect_to @post, notice: 'Comment was successfully destroyed.' }
 			format.json { head :no_content }
+      format.js { render action: "reload" }
 		end
 	end
 

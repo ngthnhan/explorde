@@ -1,7 +1,7 @@
-$(document).on("ready, page:change", function() {
-  jQuery(".best_in_place").best_in_place();
+function init_best_in_place() {
+	jQuery(".best_in_place").best_in_place();
 
-  $(".best_in_place").bind("best_in_place:activate", function() {
+	$(".best_in_place").bind("best_in_place:activate", function() {
 		// Find the OK-button and hide it
 		$(this).find("input[type=submit]").hide();
 		// Append instruction
@@ -13,7 +13,9 @@ $(document).on("ready, page:change", function() {
 			}
 		});
 	});
+}
 
+$(document).on("ready, page:change", function() {
 	var TWO_PI = 2 * Math.PI;
 
 	var MAX_LEVEL = $("#main-canvas").data("resolution-level") - 1;
@@ -153,4 +155,5 @@ $(document).on("ready, page:change", function() {
 	}
 
 	draw();
+	init_best_in_place();
 });

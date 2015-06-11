@@ -6,7 +6,7 @@
 		</div>
 		<div class="comments">
 			<div class="comment-header clearfix">
-				<strong class="left"><%= link_to pluralize(@post.comments.count, "Comment"), post_comments_path(@post) %> </strong>
+				<strong class="left comment-total"><%= link_to pluralize(@post.comments.count, "Comment"), post_comments_path(@post) %> </strong>
 				<div class="comment-sort right">
 					<%= link_to "oldest", @post %>
 					<%= link_to "newest", @post %>
@@ -19,7 +19,7 @@
 					<%= render "comments/form" %>
 				</div>
 			<% end %>
-			<ul>
+			<ul class="comment-body">
 				<%= render @post.comments.order("created_at desc") %>
 			</ul>
 		</div>
