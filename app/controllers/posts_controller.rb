@@ -67,34 +67,22 @@ class PostsController < ApplicationController
 
 	def like
 		@post.liked_by current_user
-		respond_to do |format|
-			format.html { redirect_to @post }
-			format.js { render action: "rating_reload" }
-		end	
+		rating_respond
 	end
 
 	def unlike
 		@post.unliked_by current_user
-		respond_to do |format|
-			format.html { redirect_to @post }
-			format.js { render action: "rating_reload" }
-		end	
+		rating_respond	
 	end
 
 	def dislike
 		@post.disliked_by current_user
-		respond_to do |format|
-			format.html { redirect_to @post }
-			format.js { render action: "rating_reload" }
-		end	
+		rating_respond
 	end
 
 	def undislike
 		@post.undisliked_by current_user
-		respond_to do |format|
-			format.html { redirect_to @post }
-			format.js { render action: "rating_reload" }
-		end	
+		rating_respond
 	end
 
 
