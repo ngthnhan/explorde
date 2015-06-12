@@ -1,4 +1,4 @@
 $(".comments textarea").val("");
 $(".comment-body").html("<%= j render @post.comments.order('created_at desc') %>");
-$(".comment-total > a").text("<%= pluralize @post.comments.count, 'Comment' %>");
+$(".comment-total").text("<%= pluralize @post.comments.count, 'Comment' %>");
 init_best_in_place();
