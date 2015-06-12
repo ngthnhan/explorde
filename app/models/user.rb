@@ -17,4 +17,15 @@ class User < ActiveRecord::Base
 
 	self.per_page = 1
 
+	def get_total_likes
+		sum = 0
+		self.posts.each do |post|
+			sum += (post.get_likes.size - post.get_dislikes.size)
+		end
+		sum
+	end
+
+	def get_total_posts
+		self.posts.count
+	end
 end

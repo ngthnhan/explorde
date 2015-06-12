@@ -4,8 +4,8 @@
 	</div>
 	<div class="large-5 columns">
 		<h1><%= @user.username %></h1>
-		<p>Total like:</p>
-		<p>Total post:</p>
+		<p>Total like: <%= @user.get_total_likes %></p>
+		<p>Total post: <%= @user.get_total_posts %></p>
 	</div>
 	<div class="large-2"></div>
 </div>

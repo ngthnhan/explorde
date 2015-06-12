@@ -19,5 +19,5 @@ class Post < ActiveRecord::Base
 		Post.where("id > ?", id).first
 	end
 
-	self.per_page = 1
+	self.per_page = 12
 end
